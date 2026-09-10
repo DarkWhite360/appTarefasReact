@@ -16,7 +16,7 @@ export default function ListarTarefas({ navigation }) {
             setTarefas(resposta.data);
             console.log(resposta.data);
         } catch (error) {
-            console.log("Erro ao buscar serviço: " + error.response.data.message);
+            console.log("Erro ao buscar serviço: " + error.response.data.mensagem);
         }
 
         //implmentar o finlay
