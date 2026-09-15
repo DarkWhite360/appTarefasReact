@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from "react-native";
-import api from "../service/api";
+import api from "../../service/api";
 
 function EditarTarefa({ route }) {
     const id = route.params.item.id;

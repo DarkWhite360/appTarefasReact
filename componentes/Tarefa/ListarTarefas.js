@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import React, { useState, useEffect } from "react";
 // import tarefas from "../mook/BaseTarefas";
-import api from "../service/api.js";
+import api from "../../service/api.js";
 
 
 
@@ -13,8 +13,8 @@ export default function ListarTarefas({ navigation }) {
     const buscarTarefa = async () => {
         try {
             const resposta = await api.get("/tarefas");
-            setTarefas(resposta.data);
-            console.log(resposta.data);
+            setTarefas(resposta.data.dados);
+            
         } catch (error) {
             console.log("Erro ao buscar serviço: " + error.response.data.mensagem);
         }

@@ -1,5 +1,5 @@
 import {Text, TouchableOpacity,View} from "react-native";
-import ListarTarefas from "./ListarTarefas"
+import ListarTarefas from "./Tarefa/ListarTarefas"
 
 function Home({navigation}){
     return(

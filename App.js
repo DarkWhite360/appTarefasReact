@@ -3,13 +3,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import ListarTarefas from "./componentes/ListarTarefas";
+import ListarTarefas from "./componentes/Tarefa/ListarTarefas";
 import Home from "./componentes/Home";
-import ListarTarefa from './componentes/ListarTarefa';
-import EditarTarefa from './componentes/EditarTarefa';
+import ListarTarefa from './componentes/Tarefa/ListarTarefa';
+import EditarTarefa from './componentes/Tarefa/EditarTarefa';
 import Responsaveis from './componentes/Responsaveis';
 import Perfil from './componentes/Perfil';
-import CadastrarTarefa from './componentes/CadastrarTarefa';
+import CadastrarTarefa from './componentes/Tarefa/CadastrarTarefa';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

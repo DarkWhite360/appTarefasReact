@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Alert, Text, View, StyleSheet, ScrollView, TouchableOpacity, TextInput} from "react-native";
-import api from "../service/api";
+import api from "../../service/api";
 
 function CadastrarTarefa({navigation}) {
 
