@@ -3,13 +3,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import ListarTarefas from "./componentes/Tarefa/ListarTarefas";
 import Home from "./componentes/Home";
+import Perfil from './componentes/Perfil';
+import ListarTarefas from "./componentes/Tarefa/ListarTarefas";
 import ListarTarefa from './componentes/Tarefa/ListarTarefa';
 import EditarTarefa from './componentes/Tarefa/EditarTarefa';
-import Responsaveis from './componentes/Responsaveis';
-import Perfil from './componentes/Perfil';
 import CadastrarTarefa from './componentes/Tarefa/CadastrarTarefa';
+import ListarResponsaveis from './componentes/Responsavel/ListarResponsaveis';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,7 +30,7 @@ function MyTabs(){
           tabBarIcon:({color,size})=>(<Ionicons name="checkbox" size={size} color={color}/>),
         }}
       />
-      <Tab.Screen name ="Responsáveis" component={Responsaveis} 
+      <Tab.Screen name ="Responsáveis" component={ListarResponsaveis} 
         options={{
           tabBarIcon:({color,size})=>(<Ionicons name="people" size={size} color={color}/>),
         }}
