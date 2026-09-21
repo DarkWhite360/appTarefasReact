@@ -54,18 +54,42 @@ const[nome, setNome] = useState();
                         onChangeText={setFoto}
                         style={estilo.input}
                     />
+
                     <Text style={estilo.responsavel}>Cargo</Text>
-                    <TextInput
-                        value={cargo}
-                        onChangeText={setCargo}
+                    <Picker
+                        selectedValue={cargo}
+                        onValueChange={(itemValue)=> {console.log("Cargo Selecionado:", itemValue); setCargo(itemValue)}}
                         style={estilo.input}
-                    />
+                    >
+                        <Picker.Item label="DEV_BACKEND" value="DEV_BACKEND"/>
+                        <Picker.Item label="DEV_FRONTEND" value="DEV_FRONTEND"/>
+                        <Picker.Item label="MANAGER" value="MANAGER"/>
+                        <Picker.Item label="QA" value="QA"/>
+                        <Picker.Item label="OUTROS" value="OUTROS"/>
+                    </Picker>
+
+                    <Text style={estilo.responsavel}>Status</Text>  
+                    <Picker
+                        selectedValue={status}
+                        onValueChange={(itemValue)=>{console.log("Status:",itemValue); setStatus(itemValue)}}
+                        style={estilo.input}
+                    >
+                        <Picker.Item label="ATIVO" value="ATIVO"/>
+                        <Picker.Item label="INATIVO" value="INATIVO"/>
+                    </Picker>
+                    
                     <Text style={estilo.responsavel}>Departamento</Text>
-                    <TextInput
-                        value={departamento}
-                        onChangeText={setDepartamento}
+                    <Picker
+                        selectedValue={departamento}
+                        onValueChange={(itemValue)=>{console.log("Departamento:",itemValue); setDepartamento(itemValue)}}
                         style={estilo.input}
-                    />
+                    >
+                        <Picker.Item label="TI" value="TI"/>
+                        <Picker.Item label="FINANCEIRO" value="FINANCEIRO"/>
+                        <Picker.Item label="RH" value="RH"/>
+                        <Picker.Item label="ADMINISTRATIVO" value="ADMINISTRATIVO"/>
+                        <Picker.Item label="OUTRO" value="OUTRO"/>
+                    </Picker>
 
                     <TouchableOpacity style={estilo.botaoCadastrar}>
                         <Text style={estilo.textoBotao}>Atualizar</Text>

@@ -9,6 +9,11 @@ function EditarTarefa({ route }) {
 
     const [titulo, setTitulo] = useState();
     const [descricao, setDescricao] = useState();
+    const [observacao, setObservacao] = useState();
+    const [preco, setPreco] = useState();
+    const [prioridade, setPrioridade] = useState();
+    const [dataLimite, setDataLimite] = useState();
+    const [status, setStatus] = useState();
     const [responsavel, setResponsavel] = useState();
 
     const buscarTarefa = async () => {
@@ -33,7 +38,7 @@ function EditarTarefa({ route }) {
         buscarTarefa();
     }, []);
 
-    const atualizar = async ()=>{
+    const atualizar = async () => {
         console.log("Atualizar")
     }
 
@@ -64,6 +69,51 @@ function EditarTarefa({ route }) {
                         numberOfLines={4}
                         style={estilo.inputDescricao}
                     />
+
+                    <Text style={estilo.rotulo}>Observação:</Text>
+                    <TextInput
+                        value={observacao}
+                        onChangeText={setObservacao}
+                        multiline={true}
+                        numberOfLines={4}
+                        style={estilo.inputDescricao}
+                    />
+
+                    <Text style={estilo.rotulo}>Preço:</Text>
+                    <TextInput
+                        value={preco}
+                        onChangeText={setPreco}
+                        style={estilo.input}
+                    />
+
+                    <Text style={estilo.rotulo}>Prioridade:</Text>
+                    <Picker
+                        selectedValue={prioridade}
+                        onValueChange={(itemValue) => { console.log("Prioridade Selecioanda:", prioridade); setPrioridade(itemValue) }}
+                        style={estilo.input}
+                    >
+                        <Picker.item label="ALTA" value="ALTA" />
+                        <Picker.item label="MEDIA" value="MEDIA" />
+                        <Picker.item label="BAIXA" value="BAIXA" />
+                    </Picker>
+
+                    <Text style={estilo.rotulo}>Data Limite:</Text>
+                    <TextInput
+                        value={dataLimite}
+                        onChangeText={setDataLimite}
+                        style={estilo.input}
+                    />
+
+                    <Text style={estilo.rotulo}>Status:</Text>
+                    <Picker
+                        selectedValue={status}
+                        onValueChange={(itemValue) => { console.log("Status selecioando:", status); setStatus(itemValue) }}
+                        style={estilo.input}
+                    >
+                        <Picker.Item label="PENDENTE" value="PENDENTE" />
+                        <Picker.Item label="EM_ANDAMENTO" value="EM_ANDAMENTO" />
+                        <Picker.Item label="CONCLUIDA" value="CONCLUIDA" />
+                    </Picker>
 
                     <Text style={estilo.rotulo}>Responsavel:</Text>
                     <TextInput
