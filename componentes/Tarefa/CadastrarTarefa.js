@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Text, View, StyleSheet, ScrollView, TouchableOpacity, TextInput} from "react-native";
 import api from "../../service/api";
-import { Picker } from "react-native-web";
+import { Picker } from '@react-native-picker/picker';
 
 function CadastrarTarefa({navigation}) {
 
@@ -14,6 +14,7 @@ function CadastrarTarefa({navigation}) {
     const [status, setStatus] = useState();
     const [responsavel, setResponsavel] = useState();
 
+    /*
     const cadastrar = async ()=>{
         if(!titulo.trim() || !descricao.trim() || !responsavel.trim()){
             Alert.alert("Atenção", "Os campos são obrigatórios");
@@ -33,103 +34,99 @@ function CadastrarTarefa({navigation}) {
             console.log("Erro ao cadastrar tarefa!!!", error.response.data.mensagem);
         }
     }
-
+    */
     return (
 
         <View style={estilo.container}>
 
-            <View style={estilo.todo}>
+            
                 <View style={estilo.topo}>
                     <Text style={estilo.textoTopo}>Cadastro de Tarefas</Text>
                     <TouchableOpacity style={estilo.botaoCadastrar}
-                        onPress={() => navigation.navigate('CadastrarTarefa')}>
+                        onPress={()=> navigation.navigate('CadastrarTarefa')}>
                         <Text style={estilo.textoBotao}>+ Nova Tarefa</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            
 
-            <ScrollView contentContainerStyle={estilo.cadastrarTarefas}>
-                <View style={estilo.itemLista}>
+                <ScrollView>
+                    <View style={estilo.itemLista}>
 
-                    <Text style={estilo.titulo}>Titulo da Tarefa:</Text>
-                    <TextInput
-                        value={titulo}
-                        onChangeText={setTitulo}
-                        style={estilo.input}
-                    />
+                        <Text style={estilo.titulo}>Titulo da Tarefa:</Text>
+                        <TextInput
+                            value={titulo}
+                            onChangeText={setTitulo}
+                            style={estilo.input}
+                        />
 
-                    <Text style={estilo.rotulo}>Descrição:</Text>
-                    <TextInput
-                        value={descricao}
-                        onChangeText={setDescricao}
-                        multiline = {true}
-                        numberOfLines={4}
-                        style={estilo.inputDescricao}
-                    />
+                        <Text style={estilo.rotulo}>Descrição:</Text>
+                        <TextInput
+                            value={descricao}
+                            onChangeText={setDescricao}
+                            multiline = {true}
+                            numberOfLines={4}
+                            style={estilo.inputDescricao}
+                        />
 
-                    <Text style={estilo.rotulo}>Observação:</Text>
-                    <TextInput
-                        value={observacao}
-                        onChangeText={setObservacao}
-                        multiline={true}
-                        numberOfLines={4}
-                        style={estilo.inputDescricao}
-                    />
+                        <Text style={estilo.rotulo}>Observação:</Text>
+                        <TextInput
+                            value={observacao}
+                            onChangeText={setObservacao}
+                            multiline={true}
+                            numberOfLines={4}
+                            style={estilo.inputDescricao}
+                        />
 
-                    <Text style={estilo.rotulo}>Preço:</Text>
-                    <TextInput
-                        value={preco}
-                        onChangeText={setPreco}
-                        style={estilo.input}
-                    />
+                        <Text style={estilo.rotulo}>Preço:</Text>
+                        <TextInput
+                            value={preco}
+                            onChangeText={setPreco}
+                            style={estilo.input}
+                        />
 
-                    <Text style={estilo.rotulo}>Prioridade:</Text>
-                    <Picker 
-                        selectedValue={prioridade}
-                        onValueChange={(itemValue)=> {console.log("Prioridade Selecioanda:", prioridade); setPrioridade(itemValue)}}
-                        style={estilo.input}
-                    >
-                        <Picker.item label="ALTA" value="ALTA"/>
-                        <Picker.item label="MEDIA" value="MEDIA"/>
-                        <Picker.item label="BAIXA" value="BAIXA"/>
-                    </Picker>
+                        <Text style={estilo.rotulo}>Prioridade:</Text>
+                        <Picker 
+                            selectedValue={prioridade}
+                            onValueChange={(itemValue)=> {console.log("Prioridade Selecioanda:", itemValue); setPrioridade(itemValue)}}
+                            style={estilo.input}
+                        >
+                            <Picker.Item label="ALTA" value="ALTA"/>
+                            <Picker.Item label="MEDIA" value="MEDIA"/>
+                            <Picker.Item label="BAIXA" value="BAIXA"/>
+                        </Picker>
 
-                    <Text style={estilo.rotulo}>Data Limite:</Text>
-                    <TextInput
-                        value={dataLimite}
-                        onChangeText={setDataLimite}
-                        style={estilo.input}
-                    />
+                        <Text style={estilo.rotulo}>Data Limite:</Text>
+                        <TextInput
+                            value={dataLimite}
+                            onChangeText={setDataLimite}
+                            style={estilo.input}
+                        />
 
-                    <Text style={estilo.rotulo}>Status:</Text>
-                    <Picker
-                        selectedValue={status}
-                        onValueChange={(itemValue)=>{console.log("Status selecioando:", status); setStatus(itemValue)}}
-                        style={estilo.input}
-                    >
-                        <Picker.Item label="PENDENTE" value="PENDENTE"/>
-                        <Picker.Item label="EM_ANDAMENTO" value="EM_ANDAMENTO"/>
-                        <Picker.Item label="CONCLUIDA" value="CONCLUIDA"/>
-                    </Picker>
+                        <Text style={estilo.rotulo}>Status:</Text>
+                        <Picker
+                            selectedValue={status}
+                            onValueChange={(itemValue)=>{console.log("Status selecioando:", itemValue); setStatus(itemValue)}}
+                            style={estilo.input}
+                        >
+                            <Picker.Item label="PENDENTE" value="PENDENTE"/>
+                            <Picker.Item label="EM_ANDAMENTO" value="EM_ANDAMENTO"/>
+                            <Picker.Item label="CONCLUIDA" value="CONCLUIDA"/>
+                        </Picker>
 
-                    <Text style={estilo.rotulo}>Responsavel:</Text>
-                    <TextInput
-                        value={responsavel}
-                        onChangeText={setResponsavel}
-                        style={estilo.input}
-                    />
-
-                    <View style = {estilo.acao}>
-                        <TouchableOpacity onPress={cadastrar} style={estilo.botaoSalvar}>
-                            <Text style={estilo.textoBotao}>Salvar</Text>    
-                        </TouchableOpacity>
+                        <Text style={estilo.rotulo}>Responsavel:</Text>
+                        <TextInput
+                            value={responsavel}
+                            onChangeText={setResponsavel}
+                            style={estilo.input}
+                        />
+                        
+                        
                     </View>
 
-                </View>
-
-            </ScrollView>
+                </ScrollView>
+            
         </View >
-    )
+    );
 
 }
 

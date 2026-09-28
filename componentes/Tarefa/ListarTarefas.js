@@ -10,6 +10,7 @@ export default function ListarTarefas({ navigation }) {
 
     const [tarefas, setTarefas] = useState([]);
 
+    /*
     const buscarTarefa = async () => {
         try {
             const resposta = await api.get("/tarefas");
@@ -25,7 +26,7 @@ export default function ListarTarefas({ navigation }) {
     useEffect(() => {
         buscarTarefa();
     }, []);
-
+    */
     return (
         <View style={estilo.container}>
             <View style={estilo.todo}>
