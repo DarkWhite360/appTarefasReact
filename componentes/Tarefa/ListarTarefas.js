@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import React, { useState, useEffect } from "react";
-// import tarefas from "../mook/BaseTarefas";
 import api from "../../service/api.js";
 
 
