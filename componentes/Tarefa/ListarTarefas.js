@@ -40,7 +40,7 @@ export default function ListarTarefas({ navigation }) {
                         tarefas.map((item) => (
                             <View key={item.id} style={estilo.itemLista}>
                                 <Text style={estilo.titulo}> {item.titulo}</Text>
-                                <Text style={estilo.responsavel}>Responsavel: {item.responsavel.nome}</Text>
+                                <Text style={estilo.responsavel}>Responsavel: {item.responsavel?.nome || ''}</Text>
                                 <View>
                                     <Text style={estilo.status}>Status: {item.status}</Text>
                                 </View>

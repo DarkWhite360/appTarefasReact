@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Alert, Text, View, StyleSheet, ScrollView, TouchableOpacity, TextInput} from "react-native";
+import { Alert, Text, View, StyleSheet, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import api from "../../service/api";
 import { Picker } from '@react-native-picker/picker';
-
-function CadastrarTarefa({navigation}) {
-
+import { useNavigation } from "@react-navigation/native";
+function CadastrarTarefa({ navigation }) {
+    const navigate = useNavigation();
     const [titulo, setTitulo] = useState();
     const [descricao, setDescricao] = useState();
     const [observacao, setObservacao] = useState();
@@ -12,119 +12,123 @@ function CadastrarTarefa({navigation}) {
     const [prioridade, setPrioridade] = useState();
     const [dataLimite, setDataLimite] = useState();
     const [status, setStatus] = useState();
-    const [responsavel, setResponsavel] = useState();
+    const [id_responsavel, setResponsavel] = useState();
 
-    /*
-    const cadastrar = async ()=>{
-        if(!titulo.trim() || !descricao.trim() || !responsavel.trim()){
+
+    const cadastrar = async () => {
+        console.log(titulo, descricao)
+        if (!titulo.trim() || !descricao.trim() || !id_responsavel.trim()) {
             Alert.alert("Atenção", "Os campos são obrigatórios");
             console.log("Os campos são obrigatórios!");
             return;
         }
 
-        try{
-            await api.post("/tarefa", {titulo, descricao, responsavel});
+        try {
+
+            await api.post("/tarefas", { titulo, descricao, id_responsavel, observacao, preco, prioridade, dataLimite, status });
             console.log("Sucesso!!");
 
-            Alert.alert("Sucesso","Tarefa cadastrada com sucesso!!!", [
-                {text: "OK", onPress:()=>navigation.GoBack()}
+            Alert.alert("Sucesso", "Tarefa cadastrada com sucesso!!!", [
+                { text: "OK", onPress: () => navigation.GoBack() }
             ]);
-        } catch(error){
-            Alert.alert("Erro","Erro ao cadastrar a tarefa!!!");
+        } catch (error) {
+            Alert.alert("Erro", "Erro ao cadastrar a tarefa!!!");
             console.log("Erro ao cadastrar tarefa!!!", error.response.data.mensagem);
         }
     }
-    */
+
     return (
 
         <View style={estilo.container}>
 
-            
-                <View style={estilo.topo}>
-                    <Text style={estilo.textoTopo}>Cadastro de Tarefas</Text>
-                    <TouchableOpacity style={estilo.botaoCadastrar}
-                        onPress={()=> navigation.navigate('CadastrarTarefa')}>
-                        <Text style={estilo.textoBotao}>+ Nova Tarefa</Text>
+
+            <View style={estilo.topo}>
+                <Text style={estilo.textoTopo}>Cadastro de Tarefas</Text>
+            </View>
+
+
+            <ScrollView>
+                <View style={estilo.itemLista}>
+
+                    <Text style={estilo.titulo}>Titulo da Tarefa:</Text>
+                    <TextInput
+                        value={titulo}
+                        onChangeText={setTitulo}
+                        style={estilo.input}
+                    />
+
+                    <Text style={estilo.rotulo}>Descrição:</Text>
+                    <TextInput
+                        value={descricao}
+                        onChangeText={setDescricao}
+                        multiline={true}
+                        numberOfLines={4}
+                        style={estilo.inputDescricao}
+                    />
+
+                    <Text style={estilo.rotulo}>Observação:</Text>
+                    <TextInput
+                        value={observacao}
+                        onChangeText={setObservacao}
+                        multiline={true}
+                        numberOfLines={4}
+                        style={estilo.inputDescricao}
+                    />
+
+                    <Text style={estilo.rotulo}>Preço:</Text>
+                    <TextInput
+                        value={preco}
+                        onChangeText={setPreco}
+                        style={estilo.input}
+                    />
+
+                    <Text style={estilo.rotulo}>Prioridade:</Text>
+                    <Picker
+                        selectedValue={prioridade}
+                        onValueChange={(itemValue) => { console.log("Prioridade Selecionada:", itemValue); setPrioridade(itemValue) }}
+                        style={estilo.input}
+                    >
+                        <Picker.Item label="ALTA" value="ALTA" />
+                        <Picker.Item label="MEDIA" value="MEDIA" />
+                        <Picker.Item label="BAIXA" value="BAIXA" />
+                    </Picker>
+
+                    <Text style={estilo.rotulo}>Data Limite:</Text>
+                    <TextInput
+                        value={dataLimite}
+                        onChangeText={setDataLimite}
+                        style={estilo.input}
+                    />
+
+                    <Text style={estilo.rotulo}>Status:</Text>
+                    <Picker
+                        selectedValue={status}
+                        onValueChange={(itemValue1) => { console.log("Status selecionado:", itemValue1); setStatus(itemValue1) }}
+                        style={estilo.input}
+                    >
+                        <Picker.Item label="PENDENTE" value="PENDENTE" />
+                        <Picker.Item label="EM_ANDAMENTO" value="EM_ANDAMENTO" />
+                        <Picker.Item label="CONCLUIDA" value="CONCLUIDA" />
+                    </Picker>
+
+                    <Text style={estilo.rotulo}>Responsavel:</Text>
+                    <TextInput
+                        value={id_responsavel}
+                        onChangeText={setResponsavel}
+                        style={estilo.input}
+                    />
+
+
+                </View>
+
+                <View style={estilo.caixaSalvar}>
+                    <TouchableOpacity style={estilo.botaoSalvar}
+                        onPress={cadastrar}>
+                        <Text style={estilo.textoBotao}>Cadastrar</Text>
                     </TouchableOpacity>
                 </View>
-            
+            </ScrollView>
 
-                <ScrollView>
-                    <View style={estilo.itemLista}>
-
-                        <Text style={estilo.titulo}>Titulo da Tarefa:</Text>
-                        <TextInput
-                            value={titulo}
-                            onChangeText={setTitulo}
-                            style={estilo.input}
-                        />
-
-                        <Text style={estilo.rotulo}>Descrição:</Text>
-                        <TextInput
-                            value={descricao}
-                            onChangeText={setDescricao}
-                            multiline = {true}
-                            numberOfLines={4}
-                            style={estilo.inputDescricao}
-                        />
-
-                        <Text style={estilo.rotulo}>Observação:</Text>
-                        <TextInput
-                            value={observacao}
-                            onChangeText={setObservacao}
-                            multiline={true}
-                            numberOfLines={4}
-                            style={estilo.inputDescricao}
-                        />
-
-                        <Text style={estilo.rotulo}>Preço:</Text>
-                        <TextInput
-                            value={preco}
-                            onChangeText={setPreco}
-                            style={estilo.input}
-                        />
-
-                        <Text style={estilo.rotulo}>Prioridade:</Text>
-                        <Picker 
-                            selectedValue={prioridade}
-                            onValueChange={(itemValue)=> {console.log("Prioridade Selecioanda:", itemValue); setPrioridade(itemValue)}}
-                            style={estilo.input}
-                        >
-                            <Picker.Item label="ALTA" value="ALTA"/>
-                            <Picker.Item label="MEDIA" value="MEDIA"/>
-                            <Picker.Item label="BAIXA" value="BAIXA"/>
-                        </Picker>
-
-                        <Text style={estilo.rotulo}>Data Limite:</Text>
-                        <TextInput
-                            value={dataLimite}
-                            onChangeText={setDataLimite}
-                            style={estilo.input}
-                        />
-
-                        <Text style={estilo.rotulo}>Status:</Text>
-                        <Picker
-                            selectedValue={status}
-                            onValueChange={(itemValue)=>{console.log("Status selecioando:", itemValue); setStatus(itemValue)}}
-                            style={estilo.input}
-                        >
-                            <Picker.Item label="PENDENTE" value="PENDENTE"/>
-                            <Picker.Item label="EM_ANDAMENTO" value="EM_ANDAMENTO"/>
-                            <Picker.Item label="CONCLUIDA" value="CONCLUIDA"/>
-                        </Picker>
-
-                        <Text style={estilo.rotulo}>Responsavel:</Text>
-                        <TextInput
-                            value={responsavel}
-                            onChangeText={setResponsavel}
-                            style={estilo.input}
-                        />
-                        
-                        
-                    </View>
-
-                </ScrollView>
-            
         </View >
     );
 
@@ -207,7 +211,7 @@ const estilo = StyleSheet.create({
         flex: 1,
         height: 60,
         width: 130,
-        marginBottom:10,
+        marginBottom: 10,
         backgroundColor: '#025E37',
         borderRadius: 8,
         justifyContent: 'center',
@@ -243,6 +247,10 @@ const estilo = StyleSheet.create({
         paddingVertical: 10,
         marginBottom: 10,
     },
+    caixaSalvar: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 
 })
 
