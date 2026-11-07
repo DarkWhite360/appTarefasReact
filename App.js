@@ -1,10 +1,13 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
+import { TouchableOpacity } from 'react-native';
 
 import Home from "./componentes/Home/Home";
 import Perfil from './componentes/Perfil/Perfil';
+import Login from './componentes/Login/Login';
 
 import ListarTarefas from "./componentes/Tarefa/ListarTarefas";
 import ListarTarefa from './componentes/Tarefa/ListarTarefa';
@@ -19,30 +22,32 @@ import EditarResponsavel from './componentes/Responsavel/EditarResponsavel';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MyTabs(){
-  return(
-    <Tab.Navigator initialRouteName = 'Home' 
-      screenOptions={{tabBarStyle:{height: 80, paddingBottom: 10, paddingTop:10},
-      headerShown: false}}
+function MyTabs() {
+  return (
+    <Tab.Navigator initialRouteName='Home'
+      screenOptions={{
+        tabBarStyle: { height: 80, paddingBottom: 10, paddingTop: 10 },
+        headerShown: false
+      }}
     >
-      <Tab.Screen name ="Home" component={Home} 
+      <Tab.Screen name="Home" component={Home}
         options={{
-          tabBarIcon:({color,size})=>(<Ionicons name="home" size={size} color={color}/>),
+          tabBarIcon: ({ color, size }) => (<Ionicons name="home" size={size} color={color} />),
         }}
       />
-      <Tab.Screen name ="Tarefas" component={ListarTarefas} 
+      <Tab.Screen name="Tarefas" component={ListarTarefas}
         options={{
-          tabBarIcon:({color,size})=>(<Ionicons name="checkbox" size={size} color={color}/>),
+          tabBarIcon: ({ color, size }) => (<Ionicons name="checkbox" size={size} color={color} />),
         }}
       />
-      <Tab.Screen name ="Responsáveis" component={ListarResponsaveis} 
+      <Tab.Screen name="Responsaveis" component={ListarResponsaveis}
         options={{
-          tabBarIcon:({color,size})=>(<Ionicons name="people" size={size} color={color}/>),
+          tabBarIcon: ({ color, size }) => (<Ionicons name="people" size={size} color={color} />),
         }}
       />
-      <Tab.Screen name ="Perfil" component={Perfil} 
+      <Tab.Screen name="Perfil" component={Perfil}
         options={{
-          tabBarIcon:({color,size})=>(<Ionicons name="person" size={size} color={color}/>),
+          tabBarIcon: ({ color, size }) => (<Ionicons name="person" size={size} color={color} />),
         }}
       />
     </Tab.Navigator>
@@ -50,78 +55,86 @@ function MyTabs(){
 }
 
 export default function App() {
-  return(
+  return (
     <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: true }}>
-        
-          <Stack.Screen name='Main' component={MyTabs}/>
+      <StatusBar style="light" backgroundColor="#2563eb" translucent={false} />
 
-          <Stack.Screen name='ListarTarefa' component={ListarTarefa} options={{
-            title:'Detalhes da tarefa',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}/>
-          <Stack.Screen name='EditarTarefa' component={EditarTarefa} options={{
-            title:'Atualizando da tarefa',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}/>
-          <Stack.Screen name='CadastrarTarefa' component={CadastrarTarefa} options={{
-            title:'Cadastro de tarefa',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}/>
+      <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: true }}>
 
-          <Stack.Screen name='CadastrarResponsavel' component={CadastrarResponsavel} options={{
-            title: 'Cadastro de Responsável',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}/>
-          <Stack.Screen name='ListarResponsavel' component={ListarResponsavel} options={{
-            title: 'Detalhes do Responsável',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}/>
-          <Stack.Screen name='EditarResponsavel' component={EditarResponsavel} options={{
-            title: 'Atualizando Responsável',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}/>
-          
-          
-        </Stack.Navigator>
+        <Stack.Screen name='Main' component={MyTabs} options={{ headerShow: false}} />
+
+        <Stack.Screen
+          name='Login'
+          component={Login}
+          options={{headerShow: false}}
+        />
+
+        <Stack.Screen name='ListarTarefa' component={ListarTarefa} options={{
+          title: 'Detalhes da tarefa',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} />
+        <Stack.Screen name='EditarTarefa' component={EditarTarefa} options={{
+          title: 'Atualizando da tarefa',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} />
+        <Stack.Screen name='CadastrarTarefa' component={CadastrarTarefa} options={{
+          title: 'Cadastro de tarefa',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} />
+
+        <Stack.Screen name='CadastrarResponsavel' component={CadastrarResponsavel} options={{
+          title: 'Cadastro de Responsável',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} />
+        <Stack.Screen name='ListarResponsavel' component={ListarResponsavel} options={{
+          title: 'Detalhes do Responsável',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} />
+        <Stack.Screen name='EditarResponsavel' component={EditarResponsavel} options={{
+          title: 'Atualizando Responsável',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} />
+
+
+      </Stack.Navigator>
     </NavigationContainer>
-    
+
   );
 }
 
